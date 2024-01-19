@@ -1,0 +1,51 @@
+﻿@model double
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Drag and Drop File Upload ASP.NET 7</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" />
+    <link href="~/css/dropzone.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+</head>
+<body>
+    <form id="dropzone-upload-form" method="post" enctype="multipart/form-data"
+          data-pasley-validate class="form-horizontal form-label-left">
+        <div class="form-group">
+            <label class="control-label col-md-2" for="first-name">
+                Upload <span class="required"></span>
+            </label>
+            <div class="col-md-6" id="dropzone">
+                <div action="/home/upload" class="dropzone" id="uploader">
+                    Drop Files here or click to upload. <br />
+                </div>
+            </div>
+        </div>
+    </form>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <script src="~/js/dropzone.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            Dropzone.options.uploader = {
+                paramName: "file",
+                clickable: true,
+                uploadMultiple: true,
+                parallelUploads: 10,
+                maxFiles: 10,
+                maxFilesize: 1024 * 1024 * 2048,
+                dictDefaultMessage:'Drag your files here',
+                accept: function (file, done) {       
+                }
+            };
+        });
+    </script>
+    @if (Model > 0)
+    {
+        <p>The file's size is @Model.ToString("N") MBs</p>
+    }
+
+</body>
+</html>
+
